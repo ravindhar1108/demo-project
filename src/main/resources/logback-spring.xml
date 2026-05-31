@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- Triggers Slack Code Requirement: JSON log blocks -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.JsonEncoder">
+            <!-- Ensure your dependencies include a JSON encoder, or use a basic pattern layout that looks like JSON if no dependencies are added -->
+        </encoder>
+    </appender>
+
+    <!-- Alternative: A simple JSON-like layout if no external JSON encoder dependency is present -->
+    <appender name="JSON_CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>{"timestamp": "%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ}", "level": "%level", "thread": "%thread", "logger": "%logger{36}", "message": "%replace(%msg){'"', '\\"'}%n"}</pattern>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="JSON_CONSOLE" />
+    </root>
+</configuration>
